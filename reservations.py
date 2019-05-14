@@ -5,6 +5,7 @@ from sqlalchemy import text
 from database import db
 import json
 
+
 def reservation_entry(request):
     if request.method == 'OPTIONS':
         return Response(status=200)
@@ -21,8 +22,8 @@ def get_reservation(request):
         result: ResultProxy = db.execute(stmt)
         result = [dict(r) for r in result]
         return Response(status=200, content_type='application/json',
-                                body=json.dumps(result),
-                                charset='utf-8')
+                        body=json.dumps(result),
+                        charset='utf-8')
     except Exception as e:
         print(e)
         return Response(status=404)

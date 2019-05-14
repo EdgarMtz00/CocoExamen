@@ -19,7 +19,8 @@ def create_reservation(request):
     try:
         data = request.json_body
         user = request.authenticated_userid
-        stmt: TextClause = text('INSERT into reservaciones (usuario, vuelo, cantidad) VALUES (:user, :flight, :quantity)')
+        stmt: TextClause = text(
+            'INSERT into reservaciones (usuario, vuelo, cantidad) VALUES (:user, :flight, :quantity)')
         stmt = stmt.bindparams(user=user, flight=data['id'], quantity=data['quantity'])
         db.execute(stmt)
         return Response(status=200)
@@ -41,5 +42,5 @@ def get_fly(request):
         result: ResultProxy = db.execute(stmt)
         result = [dict(r) for r in result]
     return Response(status=200, content_type='application/json',
-                        body=json.dumps(result),
-                        charset='utf-8')
+                    body=json.dumps(result),
+                    charset='utf-8')

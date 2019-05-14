@@ -9,6 +9,7 @@ from login import login_entry
 from flights import fly_entry
 from reservations import reservation_entry
 
+
 def add_cors_headers_response_callback(event):
     def cors_headers(request, response):
         response.headers.update({
