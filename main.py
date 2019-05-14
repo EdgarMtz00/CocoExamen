@@ -7,6 +7,7 @@ from sqlalchemy import event
 from logout import logout_entry
 from login import login_entry
 from flights import fly_entry
+from reservations import reservation_entry
 
 def add_cors_headers_response_callback(event):
     def cors_headers(request, response):
@@ -36,7 +37,8 @@ if __name__ == '__main__':
         config.add_view(logout_entry, route_name='logout')
         config.add_route('flights', '/flights')
         config.add_view(fly_entry, route_name='flights')
-
+        config.add_route('reservations', '/reservations')
+        config.add_view(reservation_entry, route_name='reservations')
         app = config.make_wsgi_app()
     server = make_server('0.0.0.0', 6543, app)
     server.serve_forever()
